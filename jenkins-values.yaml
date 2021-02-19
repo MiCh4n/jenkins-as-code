@@ -9,7 +9,7 @@ controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
   image: "jenkins/jenkins"
-  tag: "2.263.3"
+  tag: "2.263.4"
   imagePullPolicy: "Always"
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
@@ -181,15 +181,17 @@ controller:
 
   # List of plugins to be install during Jenkins controller start
   installPlugins:
-    - kubernetes:1.29.0
-    - workflow-aggregator:2.6
-    - git:4.5.2
-    - configuration-as-code:1.47
-    - workflow-job
-    - credentials-binding
-    - job-dsl
-    - simple-theme-plugin
-    - ansicolor
+    - kubernetes:latest
+    - workflow-aggregator:latest
+    - git:latest
+    - github:latest
+    - job-dsl:latest
+    - configuration-as-code:latest
+    - workflow-job:latest
+    - credentials:latest
+    - credentials-binding:latest
+    - simple-theme-plugin:latest
+    - ansicolor:latest
 
   # List of plugins to install in addition to those listed in controller.installPlugins
   additionalPlugins: []
