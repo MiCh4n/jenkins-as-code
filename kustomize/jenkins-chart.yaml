@@ -1,0 +1,9 @@
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: jenkins
+chartName: jenkins
+chartRepoUrl: https://charts.jenkins.io/
+chartVersion: 3.2.3
+releaseName: jenkins
+values: ./jenkins-values.yaml

@@ -1,0 +1,23 @@
+controller:
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "2000m"
+      memory: "4096Mi"
+  installPlugins:
+    - kubernetes:latest
+    - workflow-aggregator:latest
+    - git:latest
+    - github:latest
+    - job-dsl:latest
+    - configuration-as-code:latest
+    - workflow-job:latest
+    - credentials:latest
+    - credentials-binding:latest
+    - simple-theme-plugin:latest
+    - ansicolor:latest
+  sidecars:
+    configAutoReload:
+      enabled: true
