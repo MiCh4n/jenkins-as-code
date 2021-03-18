@@ -1,3 +1,3 @@
 #!/bin/bash
-kubectl create ns jenkins-cicd
-helm install jenkins jenkins/jenkins -n jenkins-cicd -f jenkins-values.yaml
+kubectl create ns jenkins
+helm install jenkins jenkins/jenkins -n jenkins -f jenkins-values.yaml
