@@ -13,7 +13,7 @@ data:
             branchSources {
                 git {
                     id('21202203')
-                    remote('https://github.com/MiCh4n/terraform-awsec2-k3s')
+                    remote('https://github.com/MiCh4n/k3s-on-aws')
                 }
             }
             orphanedItemStrategy {
