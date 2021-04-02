@@ -192,6 +192,7 @@ controller:
     - credentials-binding:latest
     - simple-theme-plugin:latest
     - ansicolor:latest
+    - pipeline-aws:latest
 
   # List of plugins to install in addition to those listed in controller.installPlugins
   additionalPlugins: []
