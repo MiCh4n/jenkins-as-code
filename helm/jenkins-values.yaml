@@ -190,6 +190,7 @@ controller:
     - workflow-job:latest
     - credentials:latest
     - credentials-binding:latest
+    - kubernetes-credentials-provider:latest
     - simple-theme-plugin:latest
     - ansicolor:latest
     - pipeline-aws:latest
