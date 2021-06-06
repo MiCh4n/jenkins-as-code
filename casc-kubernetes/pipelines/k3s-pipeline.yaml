@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k3s-pipeline
+  labels:
+    jenkins-jenkins-config: "true"
+data:
+  test-pipeline.yaml: |+
+    jobs:
+      - script: >
+         
+          multibranchPipelineJob('Terraform-aws') {
+            branchSources {
+                git {
+                    id('21202203')
+                    remote('https://github.com/MiCh4n/k3s-on-aws')
+                }
+            }
+            orphanedItemStrategy {
+                discardOldItems {
+                    numToKeep(20)
+                }
+            }
+          }
