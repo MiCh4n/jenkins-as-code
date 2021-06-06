@@ -1,0 +1,18 @@
+jenkins:
+  securityRealm:
+    ldap:
+      configurations:
+        - server: ldaps://172.17.0.1
+          rootDN: dc=cicd-company,dc=org
+          managerDN: ""
+          managerPasswordSecret: ""
+          userSearch: "(&(objectCategory=User)(sAMAccountName={0}))"
+          groupSearchFilter: "(&(cn={0})(objectclass=group))"
+          groupMembershipStrategy:
+            fromGroupSearch:
+              filter: "(&(objectClass=group)(|(cn=GROUP_1)(cn=GROUP_2)))"
+      cache:
+        size: 100
+        ttl: 10
+      userIdStrategy: CaseInsensitive
+      groupIdStrategy: CaseSensitive
