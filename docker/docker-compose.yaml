@@ -1,0 +1,66 @@
+version: "3.9"
+services: 
+    main:
+        container_name: jenkins-main
+        depends_on: 
+            - ldap-service
+            - lum-service
+        image: jenkins/jenkins:lts
+        environment: 
+            CASC_JENKINS_CONFIG: /var/casc-configs
+        ports:
+            - 8080:8080
+            - 9999:8080
+            - 50000:50000
+        volumes:
+            - ../casc-regular:/var/casc-configs
+
+    # worker-1:
+    #     depends_on: main
+    #     container_name: jenkins-worker-1
+    #     image: jenkins/inbound-agent
+    #     environment:
+    #         JENKINS_URL: http://main:9999
+ 
+    # worker-2:
+    #     depends_on: main
+    #     container_name: jenkins-worker-2
+    #     image: jenkins/inbound-agent
+    #     environment:
+    #         JENKINS_URL: http://main:9999
+
+    ldap-service:
+        container_name: ldap
+        image: osixia/openldap
+        environment:
+            LDAP_ORGANISATION: "cicd-company"
+            LDAP_DOMAIN: "cicd-company.org"
+            LDAP_ADMIN_PASSWORD: "admin"
+            LDAP_RFC2307BIS_SCHEMA: "true"
+            LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+            LDAP_TLS_ENFORCE: "false"
+            LDAP_TLS_VERIFY_CLIENT: "try"
+        ports:
+            - 389:389
+            - 636:636
+        volumes:
+            - /opt/docker/openldap/var_lib_ldap:/var/lib/ldap
+            - /opt/docker/openldap/etc_ldap_slapd.d:/etc/ldap/slapd.d
+
+    lum-service:
+        container_name: lum-service
+        depends_on:
+            - ldap-service
+        image: wheelybird/ldap-user-manager
+        environment: 
+            SERVER_HOSTNAME: "localhost"
+            LDAP_URI: "ldaps://172.17.0.1"
+            LDAP_BASE_DN: "dc=cicd-company,dc=org"
+            LDAP_REQUIRE_STARTTLS: "TRUE"
+            LDAP_ADMINS_GROUP: "admins"
+            LDAP_ADMIN_BIND_DN: "cn=admin,dc=cicd-company,dc=org"
+            LDAP_ADMIN_BIND_PWD: "admin"
+            LDAP_IGNORE_CERT_ERRORS: "true"
+        ports:
+            - 80:80
+            - 443:443
